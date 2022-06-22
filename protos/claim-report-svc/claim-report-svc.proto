@@ -8,4 +8,5 @@ service ClaimReportService{
 message ClaimReportRequest{
     string numeroDeCarteEtudiant=1;
     string anneeBulletin=2;
+    string token=3;
 }
