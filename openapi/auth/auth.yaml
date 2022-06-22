@@ -1,0 +1,182 @@
+openapi: 3.0.0
+info:
+  title: "Authentication api"
+  version: 1.0.0
+  description: "Ce api gere l'authentification"
+
+
+servers:
+  - url: "localhost:8080"
+
+
+paths:
+
+  /v1/auth/refreshToken:
+    post:
+      description: "Rafraichir le token"
+      requestBody:
+        description: "Rafraichir le token envoyer"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                  data: 
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                    required:
+                      - token
+      
+      responses:
+          200:
+            description: "Token rafraichir"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    data: 
+                      type: object
+                      properties:
+                        token:
+                          type: string
+                      required:
+                        - token
+          501:
+            description: "Erreur Interne"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                      required:
+                        - message
+                    
+                
+
+  /v1/auth/signup:
+    post:
+      description: "S'authentifier en tant que etudiant"
+      requestBody:
+        description: "Donnees pour authentification"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    numeroCarteEtudiant:
+                      type: string
+                    password:
+                      type: string
+                  required:
+                    - numeroCarteEtudiant
+                    - password
+      responses:
+        200:
+          description: "Authentifcation reussi"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: 
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                    required:
+                      - token
+        501:
+          description: "Erreur Interne"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      
+
+  /v1/auth/signin:
+    post:
+      description: "Ajouter un etudiant"
+      requestBody:
+        description: "Donnes pour ajouter un etudiant"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    firstName:
+                      type: string
+                      description: "Nom de l'etudiant"
+                    lastName:
+                      type: string
+                      description: "Prenoms de l'etudiant"
+                    email:
+                      type: string
+                      description: "Email de l'etudiant"
+                    numeroCarteEtudiant:
+                      type: string
+                      description: "Numero de carte etudiant"
+                    password:
+                      type: string
+                  required:
+                    - firstName
+                    - lastName
+                    - email
+                    - password
+                    - numeroCarteEtudiant
+
+      responses:
+        201:
+          description: "Etudiant créé"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      numeroCarteEtudiant:
+                        type: string
+                    required:
+                      - numeroCarteEtudiant
+
+        501:
+          description: "Erreur Interne"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+      
+        
