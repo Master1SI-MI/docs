@@ -1,0 +1,11 @@
+syntax="proto3"
+
+service ClaimReportService{
+    // envoie de demande de bulletin
+    rpc SendClaimReport(stream ClaimReportRequest) returns {}
+}
+
+message ClaimReportRequest{
+    string numeroDeCarteEtudiant=1;
+    string anneeBulletin=2;
+}
