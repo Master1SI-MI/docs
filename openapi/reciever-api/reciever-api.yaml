@@ -1,0 +1,79 @@
+openapi: 3.0.0
+
+info:
+  title: "Receiver Api"
+  version: 1.0.0
+  description: "Documentation de l'API du Receiver"
+
+servers:
+  - url: "http://localhost:8081"
+
+paths:
+  /v1/reportCard: 
+    post: 
+      description: "Demande de Bulletin de note"
+      requestBody:
+        description: "Données de la demande"
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    numeroDeCarteEtudiant: 
+                      type: string
+                    anneeBulletin: 
+                      type: string
+                  required:
+                    - numeroDeCarteEtudiant
+                    - anneeBulletin
+                    
+      responses:
+        202: 
+          description: "Requête envoyer"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message
+        401:
+          description: "Etudiant non reconnue"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                    required:
+                      - message 
+
+        501:
+            description: "Erreur Interne"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                      required:
+                        - message
+                    
+                
+                    
