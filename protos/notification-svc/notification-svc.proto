@@ -1,0 +1,25 @@
+syntax="proto3"
+
+service NotificationService{
+    // envoie de notification aux admin
+    rpc SendNotificationToAdmin(stream AdminNotificationRequest) returns {}
+    
+    // envoie de notification aux etudiant
+    rpc SendNotificationToUSer(UserNotificationResquest) returns UserNotificationResponse{}
+}
+
+message AdminNotificationRequest{
+    string numeroDeCarteEtudiant=1;
+    string nom =2;
+    string anneeBulletin=3;
+    string deviceId=4;
+}
+
+message UserNotificationResquest{
+    string deviceId=5;
+    int32 status=6;
+}
+
+message UserNotificationResponse{
+    int32 code =1;
+}
