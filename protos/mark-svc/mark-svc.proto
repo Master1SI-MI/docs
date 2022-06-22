@@ -1,0 +1,18 @@
+syntax="proto3"
+
+service MarkService{
+    rpc SaveStudentMarks(StudentMarksRequest) returns StudentMarksResponse{}
+    rpc GetStudentMarksByYear(GetStudentMarksRequest) returns GetStudentMarksResponse{}
+}
+
+message StudentMarksRequest{
+    /*
+    {
+        "name":"nom de matiere",
+        "value":"note de la matiere",
+        "ue":"valeur",
+        "coeffient_ue":"valeur",
+    }
+    */
+    string marks=1;
+}
